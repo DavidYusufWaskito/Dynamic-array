@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iterator>
 
+
 // Konfigurasi struktur data
 // Ubah berapa banyak data yang akan di realokasikan sesuai nilai threshold minimum bila kapasitas habis
 #define _MinCapacityThreshold_ 0.5
