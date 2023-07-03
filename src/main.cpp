@@ -4,19 +4,6 @@
 int main()
 {
     dvd::DArray<int> a = {1,2,3,4,5};
-    // dvd::DArray<int> a;
-    // a[2] = 467;
-    // a.push_back(6);
-    // a.push_back(6);
-    // a.push_back(6);
-    // a.push_back(6);
-    // a.push_back(6);
-
-    // a.push_back(6);
-    // a.push_back(6);
-    // a.push_back(6);
-    // a.push_back(6);
-    // a.push_back(6);
 
     a.push_back(6);
     a.push_back(7);
