@@ -138,6 +138,43 @@ namespace dvd
             return;
         }
 
+        // Extend elemen array menggunakan object array
+        void extend_element(const DArray<T>& aObj)
+        {
+            // Extend dan tambahkan elemen dari aObj ke intance ini
+            T* tempArr = nullptr;
+            size_t oldSize = this->size;
+            this->size += aObj.size;
+            // cek threshold
+            double CapacityThreshold = (static_cast<double>(this->size) / this->capacity);
+            if (CapacityThreshold < _CapacityAllocationThreshold_)
+            {
+                tempArr = new T[this->capacity];
+                // Copy isi data dari array saat ini
+                std::copy(this->data,(this->data + this->size),tempArr);
+                // Masukan data dari aObj ke tempArr dimulai dari index oldSize
+                for (size_t i = 0; i < aObj.Size();i++)
+                    tempArr[oldSize++] = aObj[i];
+
+                delete[] this->data;
+                this->data = tempArr;
+            }
+            else {
+                // Tambahkan memory lagi
+                this->capacity += this->capacity * (CapacityThreshold / _MinCapacityThreshold_) - this->capacity;
+                tempArr = new T[this->capacity];
+
+                // Copy isi data dari array saat ini
+                std::copy(this->data,(this->data + this->size),tempArr);
+                // Masukan data dari aObj ke tempArr dimulai dari index oldSize
+                for (size_t i = 0; i < aObj.Size();i++)
+                    tempArr[oldSize++] = aObj[i];
+
+                delete[] this->data;
+                this->data = tempArr;
+            }
+        }
+
         /**
          * @brief Hapuskan data array
          * 

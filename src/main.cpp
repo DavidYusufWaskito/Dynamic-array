@@ -51,15 +51,15 @@ void QuickSort(dvd::DArray<T>& arr,int low,int high)
 
 int main()
 {
-    dvd::DArray<int> a = {5,1,3,2,4};
+    dvd::DArray<int> a = {1,2,3,4,5};
+    dvd::DArray<int> b = {6,7,8,9,10,11,12,13,14,15};
 
+    a.extend_element(b);
     // a.push_back(6);
     // a.push_back(7);
     // a.push_back(8);
     // a.push_back(9);
     // a.push_back(10);
-    a.push_back(2);
-    a.push_back(5);
     // a.push_back(11);
     // a.push_back(12);
     // a.push_back(13);
@@ -67,7 +67,6 @@ int main()
     // a.push_back(15);
     
     
-    dvd::DArray<int> b;
     dvd::DArray<int>::iterator it = a.begin();
     it+=6;
     std::cout << "*it: " << *it << std::endl;
