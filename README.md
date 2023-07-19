@@ -99,7 +99,7 @@ make
 
 ## Contributing
 
-Contributions to the DArray project are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request on the [GitHub repository](https://github.com/yourusername/DArray).
+Contributions to the DArray project are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request on the [GitHub repository](https://github.com/Dazzy467/Dynamic-array).
 
 ## License
 
@@ -107,4 +107,4 @@ This project is licensed under the [MIT License](LICENSE). Feel free to use, mod
 
 ## Credits
 
-DArray is developed and maintained by [Your Name](https://github.com/yourusername).
+DArray is developed and maintained by [Dazzy467](https://github.com/Dazzy467).
