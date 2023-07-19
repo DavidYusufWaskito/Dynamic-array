@@ -99,7 +99,7 @@ make
 
 ## Contributing
 
-Contributions to the DArray project are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request on the [GitHub repository](https://github.com/Dazzy467/Dynamic-array).
+Contributions to the DArray project are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request on the [Dynamic-array](https://github.com/Dazzy467/Dynamic-array).
 
 ## License
 
