@@ -149,6 +149,20 @@ namespace dvd
             T* tempArr = nullptr;
             size_t oldSize = this->size;
             this->size += aObj.size;
+
+            // cek array kosong atau tidak
+            if (this->capacity == 0 && this->data == nullptr)
+            {
+                this->capacity = aObj.Capacity();
+                tempArr = new T[this->capacity];
+                // Masukan data dari aObj ke tempArr dimulai dari index 0
+                for (size_t i = 0; i < aObj.Size(); i++)
+                    tempArr[i] = aObj[i];
+                
+                this->data = tempArr;
+                return;
+            }
+
             // cek threshold
             double CapacityThreshold = (static_cast<double>(this->size) / this->capacity);
             if (CapacityThreshold < _CapacityAllocationThreshold_)
@@ -193,8 +207,24 @@ namespace dvd
             T* tempArr = nullptr;
             size_t oldSize = this->size;
             this->size += _size;
+            
+            double CapacityThreshold = (static_cast<double>(this->size) / _size);
+            // cek array kosong atau tidak
+            if (this->capacity == 0 && this->data == nullptr)
+            {
+                // Alokasikan agar thresholdnya rendah
+                this->capacity += _size * (CapacityThreshold / _MinCapacityThreshold_);
+                tempArr = new T[this->capacity];
+                // Masukan data dari aObj ke tempArr dimulai dari index 0
+                for (size_t i = 0; i < _size; i++)
+                    tempArr[i] = array[i];
+                
+                this->data = tempArr;
+                return;
+            }
+
             // cek threshold
-            double CapacityThreshold = (static_cast<double>(this->size) / this->capacity);
+            CapacityThreshold = (static_cast<double>(this->size) / this->capacity);
             if (CapacityThreshold < _CapacityAllocationThreshold_)
             {
                 tempArr = new T[this->capacity];
@@ -282,6 +312,11 @@ namespace dvd
         double getThreshold() const
         {
             return this->size / this->capacity;
+        }
+
+        size_t Capacity() const
+        {
+            return this->capacity;
         }
     };
 }
