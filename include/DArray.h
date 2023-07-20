@@ -215,7 +215,7 @@ namespace dvd
                 // Alokasikan agar thresholdnya rendah
                 this->capacity += _size * (CapacityThreshold / _MinCapacityThreshold_);
                 tempArr = new T[this->capacity];
-                // Masukan data dari aObj ke tempArr dimulai dari index 0
+                // Masukan data dari array ke tempArr dimulai dari index 0
                 for (size_t i = 0; i < _size; i++)
                     tempArr[i] = array[i];
                 
