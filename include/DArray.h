@@ -5,8 +5,9 @@
 
 
 // Konfigurasi struktur data
-// Ubah berapa banyak data yang akan di realokasikan sesuai nilai threshold minimum bila kapasitas habis
-#define _MinCapacityThreshold_ 0.5
+// Ubah berapa banyak data yang akan di realokasikan sesuai nilai threshold mid bila kapasitas habis
+#define _MinCapacityThreshold_ 0.35
+#define _MidCapacityThreshold_ 0.5
 #define _CapacityAllocationThreshold_ 0.75
 
 namespace dvd
@@ -127,7 +128,7 @@ namespace dvd
             else
             {
                 // this->capacity = this->size + _ReallocateCount_;
-                this->capacity += this->capacity * (CapacityThreshold / _MinCapacityThreshold_) - this->capacity;
+                this->capacity += this->capacity * (CapacityThreshold / _MidCapacityThreshold_) - this->capacity;
                 T* tempArr = new T[this->capacity];
                 std::copy(this->data,(this->data + this->size),tempArr);
                 delete[] this->data;
@@ -136,6 +137,27 @@ namespace dvd
             }
 
             return;
+        }
+
+        T pop_back()
+        {
+            T temp = T{};
+            // Cek jika kapasitas masih kosong maka abaikan
+            if (this->capacity == 0 || this->size == 0 || this->data == nullptr)
+                return temp;
+
+            double CapacityThreshold = (static_cast<double>(this->size) / this->capacity);
+
+            if (CapacityThreshold <= _MinCapacityThreshold_)
+            {
+                this->capacity += this->capacity * (CapacityThreshold / _MidCapacityThreshold_) - this->capacity;
+                T* tempArr = new T[this->capacity];
+                std::copy(this->data,(this->data + this->size),tempArr);
+                delete[] this->data;
+                this->data = tempArr;
+                return this->data[(this->size--) -1];
+            }
+            else return this->data[(this->size--) -1];
         }
 
         /**
@@ -179,7 +201,7 @@ namespace dvd
             }
             else {
                 // Tambahkan memory lagi
-                this->capacity += this->capacity * (CapacityThreshold / _MinCapacityThreshold_) - this->capacity;
+                this->capacity += this->capacity * (CapacityThreshold / _MidCapacityThreshold_) - this->capacity;
                 tempArr = new T[this->capacity];
 
                 // Copy isi data dari array saat ini
@@ -213,7 +235,7 @@ namespace dvd
             if (this->capacity == 0 && this->data == nullptr)
             {
                 // Alokasikan agar thresholdnya rendah
-                this->capacity += _size * (CapacityThreshold / _MinCapacityThreshold_);
+                this->capacity += _size * (CapacityThreshold / _MidCapacityThreshold_);
                 tempArr = new T[this->capacity];
                 // Masukan data dari array ke tempArr dimulai dari index 0
                 for (size_t i = 0; i < _size; i++)
@@ -239,7 +261,7 @@ namespace dvd
             }
             else {
                 // Tambahkan memory lagi
-                this->capacity += this->capacity * (CapacityThreshold / _MinCapacityThreshold_) - this->capacity;
+                this->capacity += this->capacity * (CapacityThreshold / _MidCapacityThreshold_) - this->capacity;
                 tempArr = new T[this->capacity];
 
                 // Copy isi data dari array saat ini
